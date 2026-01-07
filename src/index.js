@@ -24,8 +24,10 @@ const TERRAIN_TYPES = [
 ]
 const DEFAULT_TERRAIN_TYPE = TERRAIN_TYPES[0]
 
-// const createGridButton = document.querySelector('#create-grid')
 const gridContainer = document.getElementById('grid-container')
+const openNewGrid = document.getElementById('open-new-grid')
+const closeNewGrid = document.getElementById('close-new-grid')
+const newGridModal = document.getElementById('new-grid-modal')
 
 const paletteContainer = document.getElementById('palette-container')
 let palette = DEFAULT_PALETTE
@@ -34,7 +36,12 @@ let activeColor = DEFAULT_CELL_COLOR
 const terrainStampContainer = document.getElementById('terrain-stamp-container')
 let activeTerrain = DEFAULT_TERRAIN_TYPE
 
-// createGridButton.addEventListener('click', getGridSize)
+openNewGrid.addEventListener('click', () => {
+    newGridModal.showModal()
+})
+closeNewGrid.addEventListener('click', () => {
+    newGridModal.close()
+})
 
 createGrid(DEFAULT_GRID_SIZE)
 createPalette(palette, paletteContainer)
@@ -105,18 +112,28 @@ function changeCellTerrainType(event) {
     event.target.innerText = activeTerrain
 }
 
-// function getGridSize() {
-//     if (!confirm
-//     ('WARNING: This will delete your current drawing. Proceed?')) {
-//         return
-//     }
-//     let gridSize = prompt('Choose your grid size (must be between 20 and 30).');
-//     if (gridSize < MINIMUM_GRID_SIZE) {
-//         gridSize = MINIMUM_GRID_SIZE
-//     } else if (gridSize > MAXIMUM_GRID_SIZE) {
-//         gridSize = MAXIMUM_GRID_SIZE
-//     }
-//
-//     clearGrid()
-//     createGrid(gridSize)
-// }
+function getGridSize(width, length) {
+    // For each arg:
+        // Check if:
+            // isInt
+            // isOverMinimum
+            // isBelowMaximum
+
+    // Set grid size
+    // Clear grid
+    // createGrid()
+
+    // if (!confirm
+    // ('WARNING: This will delete your current drawing. Proceed?')) {
+    //     return
+    // }
+    // let gridSize = prompt('Choose your grid size (must be between 20 and 30).');
+    // if (gridSize < MINIMUM_GRID_SIZE) {
+    //     gridSize = MINIMUM_GRID_SIZE
+    // } else if (gridSize > MAXIMUM_GRID_SIZE) {
+    //     gridSize = MAXIMUM_GRID_SIZE
+    // }
+    //
+    // clearGrid()
+    // createGrid(gridSize)
+}

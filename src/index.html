@@ -1,26 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Document</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Document</title>
 </head>
 
 <body>
 
-<!--TODO: Reimplement grid creation-->
-<!--<div id="user-input">-->
-<!--    <button id="create-grid" type="button">-->
-<!--        Create new, custom-sized grid-->
-<!--    </button>-->
-<!--</div>-->
+
+<div id="setup">
+    <div class="button-container">
+        <button id="open-new-grid" class="open-modal">
+            Create New Grid
+        </button>
+    </div>
+
+    <dialog id="new-grid-modal">
+        <form>
+            <header>New Grid</header>
+
+            Choose the size of the new grid.<br>
+            <br>
+            It must be:
+            <ul>
+                <li>20 to 30 squares wide</li>
+                <li>20 to 30 squares long</li>
+            </ul>
+            <br>
+            <div class="warning">This will delete your current grid.</div>
+
+            <div class="input-container">
+                <div class="labelled-input">
+                    <label for="width">Width</label><br/>
+                    <input class="number-input" type="number" id="width" name="width" min="20" max="30" autofocus/>
+                </div>
+
+                <div class="labelled-input">
+                    <label for="length">Length</label><br/>
+                    <input class="number-input" type="number" id="length" name="length" min="20" max="30"/>
+                </div>
+
+            </div>
+
+            <div class="button-container">
+                <button class="confirm">
+                    Create
+                </button>
+
+                <button id="close-new-grid" class="close-modal" value="cancel" formmethod="dialog">
+                    Cancel
+                </button>
+
+            </div>
+
+        </form>
+        
+    </dialog>
+
+</div>
 
 <div id="painter">
-  <div id="grid-container"></div>
+    <div id="grid-container"></div>
 
-  <div id="palette-container"></div>
+    <div id="palette-container"></div>
 
-  <div id="terrain-stamp-container"></div>
+    <div id="terrain-stamp-container"></div>
 
 </div>
 

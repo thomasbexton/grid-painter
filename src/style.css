@@ -11,7 +11,91 @@ body {
   color: #000000;
   font-family: sans-serif;
   font-size: 1em;
+
+
 }
+
+ul {
+  padding-left: 20px;
+}
+
+button {
+  min-width: 80px;
+  padding: 6px 8px;
+  border-radius: 6px;
+
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 24px;
+
+  margin: 16px 0;
+}
+
+.warning {
+  color: red;
+  font-weight: bold;
+}
+
+:modal {
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  min-width: 275px;
+  min-height: 22vh;
+
+  border: none;
+  border-radius: 10px;
+  padding: 0 16px;
+
+  background-color: #ffffff;
+
+  color: #000000;
+}
+
+header {
+  margin: 16px 0;
+
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  margin: 12px 0;
+}
+
+.labelled-input {
+  text-align: center;
+}
+
+label {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.number-input {
+  width: 60px;
+
+  margin: 4px 0;
+  padding: 2px 0;
+
+  font-size: 16px;
+  text-align: center;
+}
+
+
 
 #painter {
   display: flex;
