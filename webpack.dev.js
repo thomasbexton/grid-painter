@@ -6,11 +6,6 @@ module.exports = merge(common, {
   devtool: 'eval-source-map',
   devServer: {
     static: './dist',
-    open: {
-      app: {
-        name: 'google-chrome'
-      }
-    },
     watchFiles: ['src/*.html']
   },
   module: {
