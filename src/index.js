@@ -5,6 +5,7 @@ const MINIMUM_GRID_SIZE = 20
 const MAXIMUM_GRID_SIZE = 30
 const DEFAULT_GRID_SIZE = 30
 const GRID_CONTAINER_SIZE = 900
+
 const DEFAULT_PALETTE = [
     '#9A5D1A',
     '#BF7F3A',
@@ -16,6 +17,13 @@ const DEFAULT_PALETTE = [
 ]
 const DEFAULT_CELL_COLOR = DEFAULT_PALETTE[0]
 
+const TERRAIN_TYPES = [
+    '',
+    'R',
+    'D',
+]
+const DEFAULT_TERRAIN_TYPE = TERRAIN_TYPES[0]
+
 // const createGridButton = document.querySelector('#create-grid')
 const gridContainer = document.getElementById('grid-container')
 
@@ -23,10 +31,14 @@ const paletteContainer = document.getElementById('palette-container')
 let palette = DEFAULT_PALETTE
 let activeColor = DEFAULT_CELL_COLOR
 
+const terrainStampContainer = document.getElementById('terrain-stamp-container')
+let activeTerrain = DEFAULT_TERRAIN_TYPE
+
 // createGridButton.addEventListener('click', getGridSize)
 
 createGrid(DEFAULT_GRID_SIZE)
 createPalette(palette, paletteContainer)
+createTerrainStamps(TERRAIN_TYPES, terrainStampContainer)
 
 function createGrid(gridSize) {
     const cellSizeNumber = GRID_CONTAINER_SIZE / gridSize
@@ -70,6 +82,26 @@ function changeActiveColor(event) {
 
 function changeCellColor(event) {
     event.target.style.backgroundColor = activeColor
+}
+
+function createTerrainStamps(terrainTypes, terrainStampContainer) {
+    terrainTypes.forEach((terrainType) => {
+        const stamp = document.createElement('div')
+
+        stamp.innerText = terrainType
+
+        terrainStampContainer.append(stamp)
+
+        stamp.addEventListener('click', changeActiveTerrain)
+    })
+}
+
+function changeActiveTerrain(event) {
+    activeTerrain = event.target.innerText
+}
+
+function changeCellTerrainType(event) {
+    event.target.innerText = activeTerrain
 }
 
 // function getGridSize() {
