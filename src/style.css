@@ -42,3 +42,12 @@ body {
 
   font-size: 10px;
 }
+
+#palette-container {
+  border: 1px solid black;
+}
+
+#palette-container > div {
+  width: 50px;
+  height: 50px;
+}

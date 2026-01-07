@@ -5,17 +5,28 @@ const MINIMUM_GRID_SIZE = 20
 const MAXIMUM_GRID_SIZE = 30
 const DEFAULT_GRID_SIZE = 30
 const GRID_CONTAINER_SIZE = 900
-const DEFAULT_CELL_COLOR = '#000000'
+const DEFAULT_PALETTE = [
+    '#9A5D1A',
+    '#BF7F3A',
+    '#E4A766',
+    '#FFD2A0',
+    '#6A3700',
+    '#554F49',
+    '#221E1A',
+]
+const DEFAULT_CELL_COLOR = DEFAULT_PALETTE[0]
 
 // const createGridButton = document.querySelector('#create-grid')
 const gridContainer = document.getElementById('grid-container')
 
+const paletteContainer = document.getElementById('palette-container')
+let palette = DEFAULT_PALETTE
 let activeColor = DEFAULT_CELL_COLOR
 
 // createGridButton.addEventListener('click', getGridSize)
-gridContainer.addEventListener('click', changeCellColor)
 
 createGrid(DEFAULT_GRID_SIZE)
+createPalette(palette, paletteContainer)
 
 function createGrid(gridSize) {
     const cellSizeNumber = GRID_CONTAINER_SIZE / gridSize
@@ -39,6 +50,22 @@ function createGrid(gridSize) {
 
 function clearGrid() {
     gridContainer.replaceChildren()
+}
+
+function createPalette(palette, paletteContainer) {
+    palette.forEach((hexCode) => {
+        const color = document.createElement('div')
+
+        color.style.backgroundColor = hexCode
+
+        paletteContainer.append(color)
+
+        color.addEventListener('click', changeActiveColor)
+    })
+}
+
+function changeActiveColor(event) {
+    activeColor = event.target.style.backgroundColor
 }
 
 function changeCellColor(event) {
