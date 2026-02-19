@@ -108,8 +108,8 @@ label {
   display: flex;
   flex-flow: row wrap;
 
-  width: 900px;
-  height: 900px;
+  /*max-width: 900px;*/
+  /*max-height: 900px;*/
   border-top: 1px solid black;
   border-left: 1px solid black;
   margin: 0;

@@ -4,7 +4,7 @@ import Icon from './icon.png'
 const MINIMUM_GRID_SIZE = 20
 const MAXIMUM_GRID_SIZE = 30
 const DEFAULT_GRID_SIZE = 30
-const GRID_CONTAINER_SIZE = 900
+const CELL_SIZE = 30
 
 const DEFAULT_PALETTE = [
     '#9A5D1A',
@@ -28,6 +28,7 @@ const gridContainer = document.getElementById('grid-container')
 const openNewGrid = document.getElementById('open-new-grid')
 const closeNewGrid = document.getElementById('close-new-grid')
 const newGridModal = document.getElementById('new-grid-modal')
+const createNewGrid = document.getElementById('create-new-grid')
 
 const paletteContainer = document.getElementById('palette-container')
 let palette = DEFAULT_PALETTE
@@ -42,22 +43,34 @@ openNewGrid.addEventListener('click', () => {
 closeNewGrid.addEventListener('click', () => {
     newGridModal.close()
 })
+createNewGrid.addEventListener('click', (e) => {
+    e.preventDefault()
+    clearGrid()
+    const length = document.getElementById('length').value
+    const width = document.getElementById('width').value
+    createGrid(length, width, CELL_SIZE)
+    newGridModal.close()
+})
 
-createGrid(DEFAULT_GRID_SIZE)
+createGrid(DEFAULT_GRID_SIZE, DEFAULT_GRID_SIZE, CELL_SIZE)
 createPalette(palette, paletteContainer)
 createTerrainStamps(TERRAIN_TYPES, terrainStampContainer)
 
-function createGrid(gridSize) {
-    const cellSizeNumber = GRID_CONTAINER_SIZE / gridSize
-    const cellSizeString = String(cellSizeNumber)
-    const formattedCellSize = cellSizeString + 'px'
+function createGrid(length, width, cellSize) {
+    //TODO: Validate l and w. Check if:
+        // isInt
+        // isOverMinimum
+        // isBelowMaximum
 
-    for (let i = 0; i < gridSize; ++i) {
-        for (let j = 0; j < gridSize; ++j) {
+    gridContainer.style.height = getPixelDimension(length * cellSize)
+    gridContainer.style.width = getPixelDimension(width * cellSize)
+
+    for (let i = 0; i < length; ++i) {
+        for (let j = 0; j < width; ++j) {
             const cell = document.createElement('div')
 
-            cell.style.width = formattedCellSize
-            cell.style.height = formattedCellSize
+            cell.style.width = getPixelDimension(cellSize)
+            cell.style.height = getPixelDimension(cellSize)
             cell.style.backgroundColor = DEFAULT_CELL_COLOR
 
             cell.addEventListener('click', changeCellColor)
@@ -66,6 +79,10 @@ function createGrid(gridSize) {
             gridContainer.append(cell)
         }
     }
+}
+
+function getPixelDimension(int) {
+    return String(int) + 'px'
 }
 
 function clearGrid() {
@@ -110,30 +127,4 @@ function changeActiveTerrain(event) {
 
 function changeCellTerrainType(event) {
     event.target.innerText = activeTerrain
-}
-
-function getGridSize(width, length) {
-    // For each arg:
-        // Check if:
-            // isInt
-            // isOverMinimum
-            // isBelowMaximum
-
-    // Set grid size
-    // Clear grid
-    // createGrid()
-
-    // if (!confirm
-    // ('WARNING: This will delete your current drawing. Proceed?')) {
-    //     return
-    // }
-    // let gridSize = prompt('Choose your grid size (must be between 20 and 30).');
-    // if (gridSize < MINIMUM_GRID_SIZE) {
-    //     gridSize = MINIMUM_GRID_SIZE
-    // } else if (gridSize > MAXIMUM_GRID_SIZE) {
-    //     gridSize = MAXIMUM_GRID_SIZE
-    // }
-    //
-    // clearGrid()
-    // createGrid(gridSize)
 }
