@@ -45,9 +45,14 @@ closeNewGrid.addEventListener('click', () => {
 })
 createNewGrid.addEventListener('click', (e) => {
     e.preventDefault()
-    clearGrid()
     const length = document.getElementById('length').value
     const width = document.getElementById('width').value
+
+    if (!validateDimension(length) || !validateDimension(width)) {
+        //TODO: Error message
+        return false
+    }
+    clearGrid()
     createGrid(length, width, CELL_SIZE)
     newGridModal.close()
 })
@@ -57,11 +62,6 @@ createPalette(palette, paletteContainer)
 createTerrainStamps(TERRAIN_TYPES, terrainStampContainer)
 
 function createGrid(length, width, cellSize) {
-    //TODO: Validate l and w. Check if:
-        // isInt
-        // isOverMinimum
-        // isBelowMaximum
-
     gridContainer.style.height = getPixelDimension(length * cellSize)
     gridContainer.style.width = getPixelDimension(width * cellSize)
 
@@ -79,6 +79,13 @@ function createGrid(length, width, cellSize) {
             gridContainer.append(cell)
         }
     }
+}
+
+function validateDimension(rawInput) {
+    const parsed = parseInt(rawInput)
+    return Number.isInteger(parsed)
+        && parsed >= MINIMUM_GRID_SIZE
+        && parsed <= MAXIMUM_GRID_SIZE
 }
 
 function getPixelDimension(int) {
