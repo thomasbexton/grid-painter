@@ -1,6 +1,7 @@
 import './style.css'
 import Icon from './icon.png'
 import * as Validator from './modules/validator.js'
+import * as Cell from './modules/cell.js'
 
 const MINIMUM_GRID_SIZE = 20
 const MAXIMUM_GRID_SIZE = 30
@@ -71,22 +72,31 @@ createPalette(palette, paletteContainer)
 createTerrainStamps(TERRAIN_TYPES, terrainStampContainer)
 
 function createGrid(length, width, cellSize) {
+    const grid = []
+
     gridContainer.style.height = getPixelDimension(length * cellSize)
     gridContainer.style.width = getPixelDimension(width * cellSize)
 
-    for (let i = 0; i < length; ++i) {
-        for (let j = 0; j < width; ++j) {
-            const cell = document.createElement('div')
+    for (let x = 0; x < length; ++x) {
+        const row = []
 
-            cell.style.width = getPixelDimension(cellSize)
-            cell.style.height = getPixelDimension(cellSize)
-            cell.style.backgroundColor = DEFAULT_CELL_COLOR
+        for (let y = 0; y < width; ++y) {
+            const cell = Cell.create(x, y)
+            row.push(cell)
 
-            cell.addEventListener('click', changeCellColor)
-            cell.addEventListener('click', changeCellTerrainType)
+            const cellDiv = document.createElement('div')
+            cellDiv.dataset.x = cell.x
+            cellDiv.dataset.y = cell.y
+            cellDiv.style.width = getPixelDimension(cellSize)
+            cellDiv.style.height = getPixelDimension(cellSize)
+            cellDiv.style.backgroundColor = DEFAULT_CELL_COLOR
+            cellDiv.addEventListener('click', changeCellColor)
+            cellDiv.addEventListener('click', changeCellTerrainType)
 
-            gridContainer.append(cell)
+            gridContainer.append(cellDiv)
         }
+
+        grid.push(row)
     }
 }
 
