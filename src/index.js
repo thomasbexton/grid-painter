@@ -2,6 +2,7 @@ import './style.css'
 import Icon from './icon.png'
 import * as Validator from './modules/validator.js'
 import * as Cell from './modules/cell.js'
+import * as Storage from './modules/storage.js'
 
 const MINIMUM_GRID_SIZE = 20
 const MAXIMUM_GRID_SIZE = 30
@@ -98,6 +99,8 @@ function createGrid(length, width, cellSize) {
 
         grid.push(row)
     }
+
+    Storage.updateCurrentGrid(grid)
 }
 
 function getPixelDimension(int) {
