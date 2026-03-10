@@ -1,5 +1,6 @@
 import './style.css'
 import Icon from './icon.png'
+import * as Validator from './modules/validator.js'
 
 const MINIMUM_GRID_SIZE = 20
 const MAXIMUM_GRID_SIZE = 30
@@ -48,8 +49,16 @@ createNewGrid.addEventListener('click', (e) => {
     const length = document.getElementById('length').value
     const width = document.getElementById('width').value
 
-    if (!validateDimension(length) || !validateDimension(width)) {
-        //TODO: Error message
+    const validatedLength =
+        Validator.validateDimension(length, MINIMUM_GRID_SIZE, MAXIMUM_GRID_SIZE)
+    const validatedWidth =
+        Validator.validateDimension(width, MINIMUM_GRID_SIZE, MAXIMUM_GRID_SIZE)
+
+    if (!validatedLength.isValid) {
+        console.log(validatedLength.message)
+        return false
+    } else if (!validatedWidth.isValid) {
+        console.log(validatedWidth.message)
         return false
     }
     clearGrid()
@@ -79,13 +88,6 @@ function createGrid(length, width, cellSize) {
             gridContainer.append(cell)
         }
     }
-}
-
-function validateDimension(rawInput) {
-    const parsed = parseInt(rawInput)
-    return Number.isInteger(parsed)
-        && parsed >= MINIMUM_GRID_SIZE
-        && parsed <= MAXIMUM_GRID_SIZE
 }
 
 function getPixelDimension(int) {
