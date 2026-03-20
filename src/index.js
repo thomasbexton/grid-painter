@@ -2,6 +2,7 @@ import './style.css'
 import Icon from './icon.png'
 import * as Cell from './modules/cell.js'
 import * as Grid from './modules/grid.js';
+import * as Palette from './modules/palette.js'
 import * as UI from './modules/ui.js'
 import * as Validator from './modules/validator.js'
 
@@ -37,20 +38,24 @@ closeNewGrid.addEventListener('click', () => {
 // })
 
 const defaultGrid = Grid.create()
-UI.displayGrid(defaultGrid)
-UI.displayHeightPalette(Cell.getHeights())
-UI.displayTerrainStamps(Cell.getTerrain())
+let grid = defaultGrid
+UI.displayGrid(grid)
+Palette.displayHeightColors(Cell.getHeights())
+Palette.displayTerrainStamps(Cell.getTerrain())
+Palette.getCurrentHeightColor()
+Palette.getCurrentTerrainStamp()
+subscribeCells()
 
-//TODO: Enable using palette and stamps
-// function subscribeCells() {
-//     const cellDivs = document.getElementsByClassName('cell')
-//     for (const div of cellDivs) {
-//         div.addEventListener('click', (event) => {
-//             const cell = grid.cells[event.target.dataset.x][event.target.dataset.y]
-//             cell.height = Palette.getCurrentSelection().height
-//             cell.terrainType = Stamper.getCurrentSelection().type
-//             UI.clearGrid()
-//             UI.displayGrid(grid)
-//         })
-//     }
-// }
+function subscribeCells() {
+    const cellDivs = document.getElementsByClassName('cell')
+    for (const div of cellDivs) {
+        div.addEventListener('click', (event) => {
+            const cell = grid.cells[event.target.dataset.x][event.target.dataset.y]
+            cell.height = Palette.getCurrentHeightColor().currentHeight
+            cell.terrainType = Palette.getCurrentTerrainStamp().currentTerrain
+            UI.clearGrid()
+            UI.displayGrid(grid)
+            subscribeCells()
+        })
+    }
+}
