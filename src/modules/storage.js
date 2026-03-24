@@ -1,3 +1,3 @@
-export function updateCurrentGrid(grid) {
-    localStorage.setItem('currentGrid', JSON.stringify(grid))
+export function updateItem(item) {
+    localStorage.setItem(item.id, JSON.stringify(item))
 }
