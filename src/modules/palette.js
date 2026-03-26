@@ -7,7 +7,7 @@ const defaultHeightColors = [
     '#FFD2A0',
 ]
 //TODO: Use palette in localStorage, else use default
-const heightColors = {
+export const heightColors = {
     '-1': defaultHeightColors[0],
     '0': defaultHeightColors[1],
     '1': defaultHeightColors[2],
@@ -16,8 +16,8 @@ const heightColors = {
 }
 const defaultHeight = '0'
 const defaultColor = heightColors[defaultHeight]
-let currentHeight = defaultHeight
-let currentColor = defaultColor
+export let currentHeight = defaultHeight
+export let currentColor = defaultColor
 
 const terrainStampsContainer = document.getElementById('terrain-stamp-container')
 const defaultTerrainStamps = [
@@ -28,7 +28,7 @@ const defaultTerrainStamps = [
     '!',
 ]
 //TODO: Use stamps in localStorage, else use default
-const terrainStamps = {
+export const terrainStamps = {
     'clear': defaultTerrainStamps[0],
     'rough': defaultTerrainStamps[1],
     'dense': defaultTerrainStamps[2],
@@ -37,8 +37,8 @@ const terrainStamps = {
 }
 const defaultTerrain = 'clear'
 const defaultStamp = terrainStamps[defaultTerrain]
-let currentTerrain = defaultTerrain
-let currentStamp = defaultStamp
+export let currentTerrain = defaultTerrain
+export let currentStamp = defaultStamp
 
 export function displayHeightColors(heights,
                                     palette = heightColors,
@@ -72,20 +72,4 @@ export function displayTerrainStamps(terrain,
 function changeCurrentTerrainStamp(event) {
     currentTerrain = event.target.dataset.type
     currentStamp = event.target.innerText
-}
-
-export function getHeightColors() {
-    return heightColors
-}
-
-export function getTerrainStamps() {
-    return terrainStamps
-}
-
-export function getCurrentHeightColor() {
-    return { currentHeight, currentColor }
-}
-
-export function getCurrentTerrainStamp() {
-    return { currentTerrain, currentStamp }
 }

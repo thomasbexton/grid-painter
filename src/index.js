@@ -58,8 +58,8 @@ function subscribeCells() {
     for (const div of cellDivs) {
         div.addEventListener('click', (event) => {
             const cell = currentGrid.cells[event.target.dataset.x][event.target.dataset.y]
-            cell.height = Palette.getCurrentHeightColor().currentHeight
-            cell.terrainType = Palette.getCurrentTerrainStamp().currentTerrain
+            cell.height = Palette.currentHeight
+            cell.terrainType = Palette.currentTerrain
             Storage.updateItem(currentGrid)
             UI.clearGrid()
             UI.displayGrid(currentGrid)

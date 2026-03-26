@@ -1,5 +1,4 @@
 import * as Palette from './palette.js'
-import {getHeightColors} from "./palette.js";
 
 const newGridModal = document.getElementById('new-grid-modal')
 const gridContainer = document.getElementById('grid-container')
@@ -34,8 +33,8 @@ function displayCell(cell) {
     cellDiv.dataset.y = cell.y
     cellDiv.style.width = intToPixels(currentCellSize)
     cellDiv.style.height = intToPixels(currentCellSize)
-    cellDiv.style.backgroundColor = Palette.getHeightColors()[cell.height]
-    cellDiv.innerText = Palette.getTerrainStamps()[cell.terrainType]
+    cellDiv.style.backgroundColor = Palette.heightColors[cell.height]
+    cellDiv.innerText = Palette.terrainStamps[cell.terrainType]
     gridContainer.append(cellDiv)
 }
 
