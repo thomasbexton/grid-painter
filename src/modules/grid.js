@@ -4,13 +4,9 @@ export const minimumSize = 20
 export const maximumSize = 30
 export const defaultSize = 25
 
-let idCounter = 0
-
-export function create(length = defaultSize, width = defaultSize) {
-    //TODO: Get key of latest item in storage or default to 0
-    const id = idCounter++
-    //TODO: Use inputted name or default to gridID
-    const name = `grid${id}`
+export function create(id = 0, length = defaultSize, width = defaultSize, name = '') {
+    const type = 'grid'
+    if (name === '') name = type + id.toString()
     const cells = []
     for (let x = 0; x < length; ++x) {
         const row = []
@@ -20,5 +16,5 @@ export function create(length = defaultSize, width = defaultSize) {
         }
         cells.push(row)
     }
-    return { id, name, cells, length, width }
+    return { id, type, name, cells, length, width }
 }
