@@ -43,13 +43,13 @@ export let currentStamp = defaultStamp
 export function displayHeightColors(heights,
                                     palette = heightColors,
                                     container = heightColorsContainer) {
-    heights.levels.forEach((level) => {
+    for (const level of heights.levels) {
         const colorDiv = document.createElement('div')
         colorDiv.dataset.level = level
         colorDiv.style.backgroundColor = palette[level]
         container.append(colorDiv)
         colorDiv.addEventListener('click', changeCurrentHeightColor)
-    })
+    }
 }
 
 function changeCurrentHeightColor(event) {
@@ -60,13 +60,13 @@ function changeCurrentHeightColor(event) {
 export function displayTerrainStamps(terrain,
                                      stamps = terrainStamps,
                                      container = terrainStampsContainer) {
-    terrain.types.forEach((type) => {
+    for (const type of terrain.types) {
         const stampDiv = document.createElement('div')
         stampDiv.dataset.type = type
         stampDiv.innerText = stamps[type]
         container.append(stampDiv)
         stampDiv.addEventListener('click', changeCurrentTerrainStamp)
-    })
+    }
 }
 
 function changeCurrentTerrainStamp(event) {

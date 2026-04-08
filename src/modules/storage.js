@@ -15,10 +15,9 @@ export function getLastItem() {
 function getItems() {
     const sortedKeys = Object.keys(localStorage).sort()
     let items = []
-    sortedKeys.forEach((key) => {
+    for (const key of sortedKeys) {
         const parsedValue = JSON.parse(localStorage.getItem(key))
         items.push(parsedValue)
-        return items
-    })
+    }
     return items
 }
