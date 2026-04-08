@@ -1,25 +1,25 @@
 export const heights = {
-    'options': [
+    options: [
         '-1',
         '0',
         '1',
         '2',
         '3',
     ],
-    'default': '0',
+    initial: '0',
 }
 export const terrain = {
-    'options': [
+    options: [
         'clear',
         'rough',
         'dense',
         'impassable',
         'blocked',
     ],
-    'default': 'clear',
+    initial: 'clear',
 }
 
-export function create(x, y, height = heights.default, terrainType = terrain.default) {
+export function create(x, y, height = heights.initial, terrainType = terrain.initial) {
     return {
         x, y, height, terrainType
     }

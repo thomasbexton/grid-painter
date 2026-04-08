@@ -1,6 +1,6 @@
-const paletteContainer = document.getElementById('palette-container')
+import * as Slot from "./slot"
 
-const defaultHeightColors = [
+export const defaultColors = [
     '#6A3700',
     '#9A5D1A',
     '#BF7F3A',
@@ -9,18 +9,18 @@ const defaultHeightColors = [
 ]
 //TODO: Use palette in localStorage, else use default
 export const heightColors = {
-    '-1': defaultHeightColors[0],
-    '0': defaultHeightColors[1],
-    '1': defaultHeightColors[2],
-    '2': defaultHeightColors[3],
-    '3': defaultHeightColors[4],
+    '-1': defaultColors[0],
+    '0': defaultColors[1],
+    '1': defaultColors[2],
+    '2': defaultColors[3],
+    '3': defaultColors[4],
 }
 const defaultHeight = '0'
 const defaultColor = heightColors[defaultHeight]
 export let currentHeight = defaultHeight
 export let currentColor = defaultColor
 
-const defaultTerrainStamps = [
+export const defaultText = [
     '',
     'R',
     'D',
@@ -29,55 +29,82 @@ const defaultTerrainStamps = [
 ]
 //TODO: Use stamps in localStorage, else use default
 export const terrainStamps = {
-    'clear': defaultTerrainStamps[0],
-    'rough': defaultTerrainStamps[1],
-    'dense': defaultTerrainStamps[2],
-    'impassable': defaultTerrainStamps[3],
-    'blocked': defaultTerrainStamps[4],
+    'clear': defaultText[0],
+    'rough': defaultText[1],
+    'dense': defaultText[2],
+    'impassable': defaultText[3],
+    'blocked': defaultText[4],
 }
 const defaultTerrain = 'clear'
 const defaultStamp = terrainStamps[defaultTerrain]
 export let currentTerrain = defaultTerrain
 export let currentStamp = defaultStamp
 
-export function displayHeightColors(data,
-                                    crosswalk = heightColors,
-                                    container = paletteContainer) {
-    const paletteDiv = document.createElement('div')
-    paletteDiv.classList.add('palette')
-    for (const option of data.options) {
-        const slotDiv = document.createElement('div')
-        slotDiv.classList.add('palette-slot')
-        slotDiv.dataset.option = option
-        slotDiv.style.backgroundColor = crosswalk[option]
-        paletteDiv.append(slotDiv)
-        slotDiv.addEventListener('click', changeCurrentHeightColor)
+// export function displayHeightColors(data,
+//                                     crosswalk = heightColors,
+//                                     container = paletteContainer) {
+//     const paletteDiv = document.createElement('div')
+//     paletteDiv.classList.add('palette')
+//     for (const option of data.options) {
+//         const slotDiv = document.createElement('div')
+//         slotDiv.classList.add('palette-slot')
+//         slotDiv.dataset.option = option
+//         slotDiv.style.backgroundColor = crosswalk[option]
+//         paletteDiv.append(slotDiv)
+//         slotDiv.addEventListener('click', changeCurrentHeightColor)
+//     }
+//     container.append(paletteDiv)
+// }
+//
+// export function displayTerrainStamps(data,
+//                                      crosswalk = terrainStamps,
+//                                      container = paletteContainer) {
+//     const paletteDiv = document.createElement('div')
+//     paletteDiv.classList.add('palette')
+//     for (const option of data.options) {
+//         const slotDiv = document.createElement('div')
+//         slotDiv.classList.add('palette-slot')
+//         slotDiv.dataset.option = option
+//         slotDiv.innerText = crosswalk[option]
+//         paletteDiv.append(slotDiv)
+//         slotDiv.addEventListener('click', changeCurrentTerrainStamp)
+//     }
+//     container.append(paletteDiv)
+// }
+//
+// function changeCurrentHeightColor(event) {
+//     currentHeight = event.target.dataset.option
+//     currentColor = event.target.style.backgroundColor
+// }
+//
+// function changeCurrentTerrainStamp(event) {
+//     currentTerrain = event.target.dataset.option
+//     currentStamp = event.target.innerText
+// }
+
+export const media = [
+    'color',
+    'text',
+]
+
+export function create(medium, data, visuals, id = 0, name = '') {
+    const type = 'palette'
+    if (name === '') name = type + id.toString()
+
+    // Validate media.includes(medium)
+    // Validate that data.options.length === visuals.length
+
+    const slots = []
+    let activeSlot
+    for (let index = 0; index < data.options.length; ++index) {
+        const option = data.options[index]
+        const isInitial = option === data.initial
+        const slot = Slot.create(medium, option, visuals[index], isInitial)
+        slots.push(slot)
+        if (isInitial) activeSlot = slot
     }
-    container.append(paletteDiv)
-}
 
-export function displayTerrainStamps(data,
-                                     crosswalk = terrainStamps,
-                                     container = paletteContainer) {
-    const paletteDiv = document.createElement('div')
-    paletteDiv.classList.add('palette')
-    for (const option of data.options) {
-        const slotDiv = document.createElement('div')
-        slotDiv.classList.add('palette-slot')
-        slotDiv.dataset.option = option
-        slotDiv.innerText = crosswalk[option]
-        paletteDiv.append(slotDiv)
-        slotDiv.addEventListener('click', changeCurrentTerrainStamp)
+    return {
+        id, type, medium, name, slots, activeSlot
     }
-    container.append(paletteDiv)
-}
-
-function changeCurrentHeightColor(event) {
-    currentHeight = event.target.dataset.option
-    currentColor = event.target.style.backgroundColor
-}
-
-function changeCurrentTerrainStamp(event) {
-    currentTerrain = event.target.dataset.option
-    currentStamp = event.target.innerText
 }

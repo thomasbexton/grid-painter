@@ -4,7 +4,10 @@ const newGridModal = document.getElementById('new-grid-modal')
 const gridContainer = document.getElementById('grid-container')
 
 const defaultCellSize = 25
+//TODO: Enable custom cell size
 const currentCellSize = defaultCellSize
+
+const paletteContainer = document.getElementById('palette-container')
 
 export function showNewGridModal() {
     newGridModal.showModal()
@@ -45,3 +48,35 @@ function intToPixels(int) {
 export function clearGrid() {
     gridContainer.replaceChildren()
 }
+
+export function displayPalette(palette, container = paletteContainer) {
+    const paletteDiv = document.createElement('div')
+    paletteDiv.classList.add('palette')
+    for (const slot of palette.slots) {
+        displaySlot(slot, paletteDiv)
+    }
+    container.append(paletteDiv)
+}
+
+function displaySlot(slot, paletteDiv) {
+    const slotDiv = document.createElement('div')
+    slotDiv.classList.add('palette-slot')
+    slotDiv.dataset.option = slot.option
+    displayVisual(slot, slotDiv)
+    paletteDiv.append(slotDiv)
+    // slotDiv.addEventListener('click', changeActiveSlot)
+}
+
+function displayVisual(slot, slotDiv) {
+    const medium = slot.medium
+    const visual = slot.visual
+    if (medium === 'color') {
+        slotDiv.style.backgroundColor = visual
+    } else if (medium === 'text') {
+        slotDiv.innerText = visual
+    }
+}
+
+// function changeActiveSlot() {
+//
+// }
