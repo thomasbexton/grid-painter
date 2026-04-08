@@ -1,4 +1,5 @@
-const heightColorsContainer = document.getElementById('palette-container')
+const paletteContainer = document.getElementById('palette-container')
+
 const defaultHeightColors = [
     '#6A3700',
     '#9A5D1A',
@@ -19,7 +20,6 @@ const defaultColor = heightColors[defaultHeight]
 export let currentHeight = defaultHeight
 export let currentColor = defaultColor
 
-const terrainStampsContainer = document.getElementById('terrain-stamp-container')
 const defaultTerrainStamps = [
     '',
     'R',
@@ -42,14 +42,18 @@ export let currentStamp = defaultStamp
 
 export function displayHeightColors(heights,
                                     palette = heightColors,
-                                    container = heightColorsContainer) {
+                                    container = paletteContainer) {
+    const paletteDiv = document.createElement('div')
+    paletteDiv.classList.add('palette')
     for (const level of heights.levels) {
         const colorDiv = document.createElement('div')
+        colorDiv.classList.add('palette-slot')
         colorDiv.dataset.level = level
         colorDiv.style.backgroundColor = palette[level]
-        container.append(colorDiv)
+        paletteDiv.append(colorDiv)
         colorDiv.addEventListener('click', changeCurrentHeightColor)
     }
+    container.append(paletteDiv)
 }
 
 function changeCurrentHeightColor(event) {
@@ -59,14 +63,18 @@ function changeCurrentHeightColor(event) {
 
 export function displayTerrainStamps(terrain,
                                      stamps = terrainStamps,
-                                     container = terrainStampsContainer) {
+                                     container = paletteContainer) {
+    const paletteDiv = document.createElement('div')
+    paletteDiv.classList.add('palette')
     for (const type of terrain.types) {
         const stampDiv = document.createElement('div')
+        stampDiv.classList.add('palette-slot')
         stampDiv.dataset.type = type
         stampDiv.innerText = stamps[type]
-        container.append(stampDiv)
+        paletteDiv.append(stampDiv)
         stampDiv.addEventListener('click', changeCurrentTerrainStamp)
     }
+    container.append(paletteDiv)
 }
 
 function changeCurrentTerrainStamp(event) {
