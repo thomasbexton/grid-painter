@@ -40,44 +40,44 @@ const defaultStamp = terrainStamps[defaultTerrain]
 export let currentTerrain = defaultTerrain
 export let currentStamp = defaultStamp
 
-export function displayHeightColors(heights,
-                                    palette = heightColors,
+export function displayHeightColors(data,
+                                    crosswalk = heightColors,
                                     container = paletteContainer) {
     const paletteDiv = document.createElement('div')
     paletteDiv.classList.add('palette')
-    for (const level of heights.levels) {
-        const colorDiv = document.createElement('div')
-        colorDiv.classList.add('palette-slot')
-        colorDiv.dataset.level = level
-        colorDiv.style.backgroundColor = palette[level]
-        paletteDiv.append(colorDiv)
-        colorDiv.addEventListener('click', changeCurrentHeightColor)
+    for (const option of data.options) {
+        const slotDiv = document.createElement('div')
+        slotDiv.classList.add('palette-slot')
+        slotDiv.dataset.option = option
+        slotDiv.style.backgroundColor = crosswalk[option]
+        paletteDiv.append(slotDiv)
+        slotDiv.addEventListener('click', changeCurrentHeightColor)
+    }
+    container.append(paletteDiv)
+}
+
+export function displayTerrainStamps(data,
+                                     crosswalk = terrainStamps,
+                                     container = paletteContainer) {
+    const paletteDiv = document.createElement('div')
+    paletteDiv.classList.add('palette')
+    for (const option of data.options) {
+        const slotDiv = document.createElement('div')
+        slotDiv.classList.add('palette-slot')
+        slotDiv.dataset.option = option
+        slotDiv.innerText = crosswalk[option]
+        paletteDiv.append(slotDiv)
+        slotDiv.addEventListener('click', changeCurrentTerrainStamp)
     }
     container.append(paletteDiv)
 }
 
 function changeCurrentHeightColor(event) {
-    currentHeight = event.target.dataset.level
+    currentHeight = event.target.dataset.option
     currentColor = event.target.style.backgroundColor
 }
 
-export function displayTerrainStamps(terrain,
-                                     stamps = terrainStamps,
-                                     container = paletteContainer) {
-    const paletteDiv = document.createElement('div')
-    paletteDiv.classList.add('palette')
-    for (const type of terrain.types) {
-        const stampDiv = document.createElement('div')
-        stampDiv.classList.add('palette-slot')
-        stampDiv.dataset.type = type
-        stampDiv.innerText = stamps[type]
-        paletteDiv.append(stampDiv)
-        stampDiv.addEventListener('click', changeCurrentTerrainStamp)
-    }
-    container.append(paletteDiv)
-}
-
 function changeCurrentTerrainStamp(event) {
-    currentTerrain = event.target.dataset.type
+    currentTerrain = event.target.dataset.option
     currentStamp = event.target.innerText
 }

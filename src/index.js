@@ -49,8 +49,8 @@ const lastGrid = Storage.getLastItem(storedGrids)
 let currentGrid = lastGrid ?? Grid.create()
 Storage.updateItem(currentGrid)
 UI.displayGrid(currentGrid)
-Palette.displayHeightColors(Cell.getHeights())
-Palette.displayTerrainStamps(Cell.getTerrain())
+Palette.displayHeightColors(Cell.heights)
+Palette.displayTerrainStamps(Cell.terrain)
 subscribeCells()
 
 function subscribeCells() {

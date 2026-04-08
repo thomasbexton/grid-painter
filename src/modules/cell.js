@@ -1,5 +1,5 @@
-const heights = {
-    'levels': [
+export const heights = {
+    'options': [
         '-1',
         '0',
         '1',
@@ -8,8 +8,8 @@ const heights = {
     ],
     'default': '0',
 }
-const terrain = {
-    'types': [
+export const terrain = {
+    'options': [
         'clear',
         'rough',
         'dense',
@@ -23,12 +23,4 @@ export function create(x, y, height = heights.default, terrainType = terrain.def
     return {
         x, y, height, terrainType
     }
-}
-
-export function getHeights() {
-    return heights
-}
-
-export function getTerrain() {
-    return terrain
 }
