@@ -110,6 +110,6 @@ export function create(medium, data, visuals, id = 0, name = '') {
     // }
 
     return {
-        id, type, medium, name, slots, activeSlot, changeActiveSlot
+        id, type, medium, name, slots, activeSlot, // changeActiveSlot
     }
 }

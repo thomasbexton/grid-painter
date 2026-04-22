@@ -44,13 +44,16 @@ createNewGrid.addEventListener('click', (e) => {
     UI.closeNewGridModal()
 })
 
+const heightPalette = Palette.create('color', Cell.heights, Palette.defaultColors)
+const terrainPalette = Palette.create('text', Cell.terrain, Palette.defaultText)
+UI.displayPalette(heightPalette)
+UI.displayPalette(terrainPalette)
+
 const storedGrids = Storage.getItemsByType('grid')
 const lastGrid = Storage.getLastItem(storedGrids)
 let currentGrid = lastGrid ?? Grid.create()
 Storage.updateItem(currentGrid)
-UI.displayGrid(currentGrid)
-UI.displayPalette(Palette.create('color', Cell.heights, Palette.defaultColors))
-UI.displayPalette(Palette.create('text', Cell.terrain, Palette.defaultText))
+UI.displayGrid(currentGrid, heightPalette, terrainPalette)
 subscribeCells()
 
 function subscribeCells() {

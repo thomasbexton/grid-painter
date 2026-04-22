@@ -29,8 +29,8 @@ function displayCell(cell, heightPalette, terrainPalette) {
     cellDiv.dataset.y = cell.y
     cellDiv.style.width = intToPixels(cell.size)
     cellDiv.style.height = intToPixels(cell.size)
-    cellDiv.style.backgroundColor = heightPalette.slots[cell.height].visual
-    cellDiv.innerText = terrainPalette.slots[cell.terrainType].visual
+    cellDiv.style.backgroundColor = heightPalette.slots.find((slot) => slot.option === cell.height).visual
+    cellDiv.innerText = terrainPalette.slots.find((slot) => slot.option === cell.terrainType).visual
     gridContainer.append(cellDiv)
 }
 
