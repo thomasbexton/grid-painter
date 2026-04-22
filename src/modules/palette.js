@@ -7,7 +7,7 @@ export const defaultColors = [
     '#E4A766',
     '#FFD2A0',
 ]
-//TODO: Use palette in localStorage, else use default
+//TODO: Remove hardcoded crosswalks
 export const heightColors = {
     '-1': defaultColors[0],
     '0': defaultColors[1],
@@ -27,7 +27,7 @@ export const defaultText = [
     'X',
     '!',
 ]
-//TODO: Use stamps in localStorage, else use default
+//TODO: Remove hardcoded crosswalks
 export const terrainStamps = {
     'clear': defaultText[0],
     'rough': defaultText[1],
@@ -104,7 +104,12 @@ export function create(medium, data, visuals, id = 0, name = '') {
         if (isInitial) activeSlot = slot
     }
 
+    //TODO: Implement
+    // function changeActiveSlot() {
+    //
+    // }
+
     return {
-        id, type, medium, name, slots, activeSlot
+        id, type, medium, name, slots, activeSlot, changeActiveSlot
     }
 }

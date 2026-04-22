@@ -1,13 +1,5 @@
-import * as Palette from './palette.js'
-
 const newGridModal = document.getElementById('new-grid-modal')
 const gridContainer = document.getElementById('grid-container')
-
-const defaultCellSize = 25
-//TODO: Enable custom cell size
-const currentCellSize = defaultCellSize
-
-const paletteContainer = document.getElementById('palette-container')
 
 export function showNewGridModal() {
     newGridModal.showModal()
@@ -17,27 +9,28 @@ export function closeNewGridModal() {
     newGridModal.close()
 }
 
-export function displayGrid(grid, cellSize = currentCellSize) {
+export function displayGrid(grid, heightPalette, terrainPalette) {
+    const cellSize = grid.cells[0][0].size
     gridContainer.style.height = intToPixels(grid.length * cellSize)
     gridContainer.style.width = intToPixels(grid.width * cellSize)
 
     for (let x = 0; x < grid.length; ++x) {
         const row = grid.cells[x]
         for (let y = 0; y < grid.width; ++y) {
-            displayCell(row[y])
+            displayCell(row[y], heightPalette, terrainPalette)
         }
     }
 }
 
-function displayCell(cell) {
+function displayCell(cell, heightPalette, terrainPalette) {
     const cellDiv = document.createElement('div')
     cellDiv.classList.add('cell')
     cellDiv.dataset.x = cell.x
     cellDiv.dataset.y = cell.y
-    cellDiv.style.width = intToPixels(currentCellSize)
-    cellDiv.style.height = intToPixels(currentCellSize)
-    cellDiv.style.backgroundColor = Palette.heightColors[cell.height]
-    cellDiv.innerText = Palette.terrainStamps[cell.terrainType]
+    cellDiv.style.width = intToPixels(cell.size)
+    cellDiv.style.height = intToPixels(cell.size)
+    cellDiv.style.backgroundColor = heightPalette.slots[cell.height].visual
+    cellDiv.innerText = terrainPalette.slots[cell.terrainType].visual
     gridContainer.append(cellDiv)
 }
 
@@ -48,6 +41,8 @@ function intToPixels(int) {
 export function clearGrid() {
     gridContainer.replaceChildren()
 }
+
+const paletteContainer = document.getElementById('palette-container')
 
 export function displayPalette(palette, container = paletteContainer) {
     const paletteDiv = document.createElement('div')
@@ -64,7 +59,8 @@ function displaySlot(slot, paletteDiv) {
     slotDiv.dataset.option = slot.option
     displayVisual(slot, slotDiv)
     paletteDiv.append(slotDiv)
-    // slotDiv.addEventListener('click', changeActiveSlot)
+    //TODO: Get this working
+    // slotDiv.addEventListener('click', slot.changeActiveSlot)
 }
 
 function displayVisual(slot, slotDiv) {
@@ -75,8 +71,5 @@ function displayVisual(slot, slotDiv) {
     } else if (medium === 'text') {
         slotDiv.innerText = visual
     }
+    //TODO: Enable image visuals
 }
-
-// function changeActiveSlot() {
-//
-// }
