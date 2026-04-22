@@ -39,7 +39,7 @@ createNewGrid.addEventListener('click', (e) => {
     currentGrid = Grid.create(nextID, length, width)
     Storage.updateItem(currentGrid)
     UI.clearGrid()
-    UI.displayGrid(currentGrid)
+    UI.displayGrid(currentGrid, heightPalette, terrainPalette)
     subscribeCells()
     UI.closeNewGridModal()
 })
@@ -61,11 +61,11 @@ function subscribeCells() {
     for (const div of cellDivs) {
         div.addEventListener('click', (event) => {
             const cell = currentGrid.cells[event.target.dataset.x][event.target.dataset.y]
-            cell.height = heightPalette.activeSlot
-            cell.terrainType = terrainPalette.activeSlot
+            cell.height = heightPalette.activeSlot.option
+            cell.terrainType = terrainPalette.activeSlot.option
             Storage.updateItem(currentGrid)
             UI.clearGrid()
-            UI.displayGrid(currentGrid)
+            UI.displayGrid(currentGrid, heightPalette, terrainPalette)
             subscribeCells()
         })
     }

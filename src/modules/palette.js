@@ -37,21 +37,7 @@ export function create(medium, data, visuals, id = 0, name = '') {
         if (isInitial) activeSlot = slot
     }
 
-    // function changeCurrentHeightColor(event) {
-    //     currentHeight = event.target.dataset.option
-    //     currentColor = event.target.style.backgroundColor
-    // }
-    //
-    // function changeCurrentTerrainStamp(event) {
-    //     currentTerrain = event.target.dataset.option
-    //     currentStamp = event.target.innerText
-    // }
-    //TODO: Implement
-    // function changeActiveSlot() {
-    //
-    // }
-
     return {
-        id, type, medium, name, slots, activeSlot, //changeActiveSlot
+        id, type, medium, name, slots, activeSlot
     }
 }

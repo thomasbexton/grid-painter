@@ -48,19 +48,19 @@ export function displayPalette(palette, container = paletteContainer) {
     const paletteDiv = document.createElement('div')
     paletteDiv.classList.add('palette')
     for (const slot of palette.slots) {
-        displaySlot(slot, paletteDiv)
+        displaySlot(slot, palette, paletteDiv)
     }
     container.append(paletteDiv)
 }
 
-function displaySlot(slot, paletteDiv) {
+//TODO: Display activeSlot
+function displaySlot(slot, palette, paletteDiv) {
     const slotDiv = document.createElement('div')
     slotDiv.classList.add('palette-slot')
     slotDiv.dataset.option = slot.option
     displayVisual(slot, slotDiv)
     paletteDiv.append(slotDiv)
-    //TODO: Get this working
-    // slotDiv.addEventListener('click', slot.changeActiveSlot)
+    slotDiv.addEventListener('click', () => palette.activeSlot = slot)
 }
 
 function displayVisual(slot, slotDiv) {
