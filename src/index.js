@@ -44,8 +44,8 @@ createNewGrid.addEventListener('click', (e) => {
     UI.closeNewGridModal()
 })
 
-const heightPalette = Palette.create('color', Cell.heights, Palette.defaultColors)
-const terrainPalette = Palette.create('text', Cell.terrain, Palette.defaultText)
+const heightPalette = Palette.create('color', Cell.heights)
+const terrainPalette = Palette.create('text', Cell.terrain)
 UI.displayPalette(heightPalette)
 UI.displayPalette(terrainPalette)
 

@@ -1,13 +1,18 @@
 import * as Slot from "./slot"
 
-export const defaultColors = [
+export const media = [
+    'color',
+    'text',
+    //TODO: Allow images
+]
+const defaultColors = [
     '#6A3700',
     '#9A5D1A',
     '#BF7F3A',
     '#E4A766',
     '#FFD2A0',
 ]
-export const defaultText = [
+const defaultText = [
     '',
     'R',
     'D',
@@ -15,12 +20,7 @@ export const defaultText = [
     '!',
 ]
 
-export const media = [
-    'color',
-    'text',
-]
-
-export function create(medium, data, visuals, id = 0, name = '') {
+export function create(medium, data, visuals = getDefaultVisualsByMedium(medium), id = 0, name = '') {
     const type = 'palette'
     if (name === '') name = type + id.toString()
 
@@ -39,5 +39,13 @@ export function create(medium, data, visuals, id = 0, name = '') {
 
     return {
         id, type, medium, name, slots, activeSlot
+    }
+}
+
+function getDefaultVisualsByMedium(medium) {
+    if (medium === 'color') {
+        return defaultColors
+    } else if (medium === 'text') {
+        return defaultText
     }
 }
