@@ -36,7 +36,7 @@ createNewGrid.addEventListener('click', (e) => {
     const nextID = ++Storage.getLastItem().id
     const length = parseInt(lengthInput.value)
     const width = parseInt(widthInput.value)
-    currentGrid = Grid.create(nextID, length, width)
+    currentGrid = Grid.create(length, width, nextID)
     Storage.updateItem(currentGrid)
     UI.clearGrid()
     UI.displayGrid(currentGrid, heightPalette, terrainPalette)

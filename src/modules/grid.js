@@ -4,7 +4,10 @@ export const minimumSize = 20
 export const maximumSize = 30
 export const defaultSize = 25
 
-export function create(id = 0, length = defaultSize, width = defaultSize, name = '') {
+export function create(length = defaultSize,
+                       width = defaultSize,
+                       id = 0,
+                       name = '') {
     const type = 'grid'
     if (name === '') name = type + id.toString()
     const cells = []

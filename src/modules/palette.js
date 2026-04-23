@@ -20,7 +20,11 @@ const defaultText = [
     '!',
 ]
 
-export function create(medium, data, visuals = getDefaultVisualsByMedium(medium), id = 0, name = '') {
+export function create(medium,
+                       data,
+                       visuals = getDefaultVisualsByMedium(medium),
+                       id = 0,
+                       name = '') {
     const type = 'palette'
     if (name === '') name = type + id.toString()
 
