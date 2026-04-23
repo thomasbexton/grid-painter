@@ -2,7 +2,7 @@ export const defaultCellSize = 25
 //TODO: Enable custom cell size
 // const currentCellSize = defaultCellSize
 export const heights = {
-    name: 'heights',
+    name: 'height',
     options: [
         '-1',
         '0',

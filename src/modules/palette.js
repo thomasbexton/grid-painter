@@ -20,12 +20,12 @@ const defaultText = [
     '!',
 ]
 
-export function create(medium,
+export function create(id,
+                       medium,
                        data,
                        visuals = getDefaultVisualsByMedium(medium),
-                       id = 0,
                        name = '') {
-    const type = 'palette'
+    const type = data.name + 'Palette'
     if (name === '') name = type + id.toString()
 
     // Validate media.includes(medium)

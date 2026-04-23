@@ -32,40 +32,42 @@ createNewGrid.addEventListener('click', (e) => {
         console.log(widthValidation.message)
         return false
     }
-    Storage.updateItem(currentGrid)
-    const nextID = ++Storage.getLastItem().id
+    Storage.updateItem(grid)
     const length = parseInt(lengthInput.value)
     const width = parseInt(widthInput.value)
-    currentGrid = Grid.create(length, width, nextID)
-    Storage.updateItem(currentGrid)
+    grid = Grid.create(Storage.getNextIDByType('grid'), length, width)
+    Storage.updateItem(grid)
     UI.clearGrid()
-    UI.displayGrid(currentGrid, heightPalette, terrainPalette)
+    UI.displayGrid(grid, heightPalette, terrainPalette)
     subscribeCells()
     UI.closeNewGridModal()
 })
 
-const heightPalette = Palette.create('color', Cell.heights)
-const terrainPalette = Palette.create('text', Cell.terrains)
+const lastHeightPalette = Storage.getLastItemByType('heightPalette')
+const lastTerrainPalette = Storage.getLastItemByType('terrainPalette')
+let heightPalette = lastHeightPalette ?? Palette.create(Storage.getNextIDByType('palette'), 'color', Cell.heights)
+let terrainPalette = lastTerrainPalette ?? Palette.create(Storage.getNextIDByType('palette'), 'text', Cell.terrains)
+Storage.updateItem(heightPalette)
+Storage.updateItem(terrainPalette)
 UI.displayPalette(heightPalette)
 UI.displayPalette(terrainPalette)
 
-const storedGrids = Storage.getItemsByType('grid')
-const lastGrid = Storage.getLastItem(storedGrids)
-let currentGrid = lastGrid ?? Grid.create()
-Storage.updateItem(currentGrid)
-UI.displayGrid(currentGrid, heightPalette, terrainPalette)
+const lastGrid = Storage.getLastItemByType('grid')
+let grid = lastGrid ?? Grid.create(Storage.getNextIDByType('grid'))
+Storage.updateItem(grid)
+UI.displayGrid(grid, heightPalette, terrainPalette)
 subscribeCells()
 
 function subscribeCells() {
     const cellDivs = document.getElementsByClassName('cell')
     for (const div of cellDivs) {
         div.addEventListener('click', (event) => {
-            const cell = currentGrid.cells[event.target.dataset.x][event.target.dataset.y]
+            const cell = grid.cells[event.target.dataset.x][event.target.dataset.y]
             cell.height = heightPalette.activeSlot.option
             cell.terrain = terrainPalette.activeSlot.option
-            Storage.updateItem(currentGrid)
+            Storage.updateItem(grid)
             UI.clearGrid()
-            UI.displayGrid(currentGrid, heightPalette, terrainPalette)
+            UI.displayGrid(grid, heightPalette, terrainPalette)
             subscribeCells()
         })
     }

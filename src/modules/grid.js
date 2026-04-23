@@ -4,9 +4,9 @@ export const minimumSize = 20
 export const maximumSize = 30
 export const defaultSize = 25
 
-export function create(length = defaultSize,
+export function create(id,
+                       length = defaultSize,
                        width = defaultSize,
-                       id = 0,
                        name = '') {
     const type = 'grid'
     if (name === '') name = type + id.toString()
@@ -19,5 +19,7 @@ export function create(length = defaultSize,
         }
         cells.push(row)
     }
-    return { id, type, name, cells, length, width }
+    return {
+        id, type, name, cells, length, width
+    }
 }
