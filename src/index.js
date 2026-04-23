@@ -45,7 +45,7 @@ createNewGrid.addEventListener('click', (e) => {
 })
 
 const heightPalette = Palette.create('color', Cell.heights)
-const terrainPalette = Palette.create('text', Cell.terrain)
+const terrainPalette = Palette.create('text', Cell.terrains)
 UI.displayPalette(heightPalette)
 UI.displayPalette(terrainPalette)
 
@@ -62,7 +62,7 @@ function subscribeCells() {
         div.addEventListener('click', (event) => {
             const cell = currentGrid.cells[event.target.dataset.x][event.target.dataset.y]
             cell.height = heightPalette.activeSlot.option
-            cell.terrainType = terrainPalette.activeSlot.option
+            cell.terrain = terrainPalette.activeSlot.option
             Storage.updateItem(currentGrid)
             UI.clearGrid()
             UI.displayGrid(currentGrid, heightPalette, terrainPalette)

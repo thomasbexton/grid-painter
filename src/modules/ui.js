@@ -30,7 +30,7 @@ function displayCell(cell, heightPalette, terrainPalette) {
     cellDiv.style.width = intToPixels(cell.size)
     cellDiv.style.height = intToPixels(cell.size)
     cellDiv.style.backgroundColor = heightPalette.slots.find((slot) => slot.option === cell.height).visual
-    cellDiv.innerText = terrainPalette.slots.find((slot) => slot.option === cell.terrainType).visual
+    cellDiv.innerText = terrainPalette.slots.find((slot) => slot.option === cell.terrain).visual
     gridContainer.append(cellDiv)
 }
 
@@ -53,7 +53,7 @@ export function displayPalette(palette, container = paletteContainer) {
     container.append(paletteDiv)
 }
 
-//TODO: Display activeSlot
+//TODO: Show activeSlot
 function displaySlot(slot, palette, paletteDiv) {
     const slotDiv = document.createElement('div')
     slotDiv.classList.add('palette-slot')
@@ -71,5 +71,5 @@ function displayVisual(slot, slotDiv) {
     } else if (medium === 'text') {
         slotDiv.innerText = visual
     }
-    //TODO: Enable image visuals
+    //TODO: Allow images
 }

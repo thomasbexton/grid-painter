@@ -2,6 +2,7 @@ export const defaultCellSize = 25
 //TODO: Enable custom cell size
 // const currentCellSize = defaultCellSize
 export const heights = {
+    name: 'heights',
     options: [
         '-1',
         '0',
@@ -11,7 +12,8 @@ export const heights = {
     ],
     initial: '0',
 }
-export const terrain = {
+export const terrains = {
+    name: 'terrain',
     options: [
         'clear',
         'rough',
@@ -26,8 +28,8 @@ export function create(x,
                        y,
                        size = defaultCellSize,
                        height = heights.initial,
-                       terrainType = terrain.initial) {
+                       terrain = terrains.initial) {
     return {
-        x, y, size, height, terrainType
+        x, y, size, height, terrain
     }
 }
